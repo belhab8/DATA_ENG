@@ -1,13 +1,26 @@
-#bash cmd to create the postgres DB's container
+#Link to taxi data
+https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+January 21 parquet : https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet
+
+
+#bach cmds to create pg-network container
+
+docker network create pg-network
 
 docker run -it \
     -e POSTGRES_USER="root" \
     -e POSTGRES_PASSWORD="root" \
     -e POSTGRES_DB="ny_taxi" \
-    -v "c:/Users/Corentin Belhabri/Desktop/DATA_ENG/week1_docker_terraform/docker_postgres/ny_taxi_data:/var/lib/postgresql/data" \
+    -v "c:/Users/Corentin Belhabri/Desktop/DATA_ENG/ny_taxi_data:/var/lib/postgresql/data" \
     -p 5431:5432 \
+    --network=pg-network \
+    --name pg-database \
     postgres:13
 
-#Link to taxi data
-https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
-January 21 parquet : https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+    -e PGADMIN_DEFAULT_PASSWORD="root" \
+    -p 8080:80 \
+    --network=pg-network \
+    --name pgadmin \
+    dpage/pgadmin4
