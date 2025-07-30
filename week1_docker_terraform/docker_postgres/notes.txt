@@ -1,17 +1,13 @@
-services:
-    postgres:
-        image: postgres:13
-        environment:
-            POSTGRES_USER: airflow
-            POSTGRES_PASSWORD: airflow
-            POSTGRES_DB: airflow
-        volumes:
-
+#bash cmd to create the postgres DB's container
 
 docker run -it \
     -e POSTGRES_USER="root" \
-    -e POSTGRES_PASSWORD='root' \
-    -e POSTGRES_DB='ny_taxi' \
-    -v c:/Users/corentin_belhabri/desktop/DATA_ENG/ny_taxi_data:/var/lib/postgresql/data \
-    -p 5432:5432 \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v "c:/Users/Corentin Belhabri/Desktop/DATA_ENG/week1_docker_terraform/docker_postgres/ny_taxi_data:/var/lib/postgresql/data" \
+    -p 5431:5432 \
     postgres:13
+
+#Link to taxi data
+https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+January 21 parquet : https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet
