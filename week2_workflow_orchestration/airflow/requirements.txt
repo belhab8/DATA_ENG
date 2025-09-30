@@ -1,0 +1,2 @@
+apache-airflow-providers-google<8.0.0
+pyarrow==6.0.1
